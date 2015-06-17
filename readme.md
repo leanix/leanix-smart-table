@@ -1,6 +1,35 @@
 # leanIX Smart Table fork
 This is a for of [Angular Smart Table](https://github.com/lorenzofox3/Smart-Table), mainly adding infinite scroll & sort & search via AJAX.
 
+## Usage:
+
+See example.html ([code](https://github.com/leanix/leanix-smart-table/blob/master/example.html), [preview](https://htmlpreview.github.io/?https://github.com/leanix/leanix-smart-table/blob/master/example.html)) for an example implementation. The stRemote directive is triggered with the attribute `st-remote="options"` on the table tag.
+
+The following options are supported:
+
+- __url__: GET endpoint (e.g., `'https://api.github.com/search/repositories'`)
+- __pageSize__: Number of items to be retrieved per GET request; set this to `false` to disable paging
+- __container__: Container to be used for infinite scrolling, `'parent'`, `'document'` or a selector (in which case jquery needs to be included)
+- __queryLabels__: Rename any of the query labels (page, size, sort, order, search; e.g. `{search: 'q', size: 'per_page'}`
+- __queryTransform__: Transform $http config object before request is sent
+  Example:
+  ```
+  queryTransform: function(config) {
+    if ('sort' in config.params) {
+      config.params.sort = config.params.sort + '_' + config.params.order;
+      delete config.params.order;
+    }
+    return config;
+  }
+  ```
+- __itemsProperty__: Property in the retrieved data that contains the array of items. If empty, the first array found will be taken. (e.g. `'items'`)
+- __success__: $http success callback with arguments `(data, status, headers, config)`; the data will only be available in the collection at the end of the current $digest cycle; call `$timeout(function(){}, 0, false)` from within the success callback to postpone execution of code until then.
+- __error__: $http error callback with arguments `(data, status, headers, config)`
+
+If a container is specified but `pageSize` is too small to generate a scrollbar, the AJAX call will be repeated until the scroll bar becomes visible.
+
+In addition, the events `stRemote.pauseInfiniteScrolling` and `stRemote.pauseInfiniteScrolling` are defined to allow pausing & unpausing infinite scroll.
+
 # Smart Table
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/lorenzofox3/Smart-Table?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
