@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Table with stRemote</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
+  <script src="dist/smart-table.js"></script>
+  <style type="text/css">
+    .st-sort-ascent:before { content: '\25B2'; font-size: 10px; position: relative; top: -2px; }
+    .st-sort-descent:before { content: '\25BC'; font-size: 10px; position: relative; top: -2px; }
+    table { border-collapse: collapse; }
+    th[st-sort] { cursor: pointer; }
+    tbody > tr:nth-child(odd) > td { background-color: #f9f9f9; }
+    th, td { padding: 8px; line-height: 18px; text-align: left; vertical-align: top; }
+    td { border-top: 1px solid #dddddd; }
+  </style>
+</head>
+
+<body ng-app="stRemote">
+  <div ng-controller="RemoteController">
+    <table st-table="collection" st-remote="remoteOptions">
+      <thead>
+        <tr>
+          <th colspan="3"><input st-search placeholder="Search for repositories..." type="text" style="width: 100%"/></th>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <th st-sort="stars">Stars</th>
+          <th st-sort="forks">Forks</th>
+          <th st-sort="updated">Last update</th>
+          <th>Url</th>
+        </tr>
+       </thead>
+      <tbody>
+        <tr ng-repeat="repo in collection track by repo.id">
+          <td ng-bind="repo.name"></td>
+          <td ng-bind="repo.stargazers_count"></td>
+          <td ng-bind="repo.forks"></td>
+          <td ng-bind="repo.updated_at"></td>
+          <td><a href="repo.url" ng-bind="repo.url"></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // NB: In the default sort order, GitHub API sometimes returns an object
+    // more than once and causes a dupe exception.
+    angular
+      .module('stRemote', ['smart-table'])
+      .controller('RemoteController', ['$scope', function($scope) {
+        $scope.collection = [];
+        $scope.remoteOptions = {
+          url: 'https://api.github.com/search/repositories',
+          pageSize: 40,
+          container: 'document',
+          queryLabels: {search: 'q', size: 'per_page'},
+          error: function(data, status, headers, config) {
+            if (status === 403 && /API rate limit exceeded/.test(data.message)) {
+              alert('GitHub rate limit exceeded. Try again in ' + Math.ceil((new Date(1000*parseInt(headers('x-ratelimit-reset'))) - new Date()) / 1000) + ' seconds.');
+            }
+          }
+        };
+      }]);
+  </script>
+</body>
+</html>
