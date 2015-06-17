@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/lorenzofox3/Smart-Table.svg?branch=master)](https://travis-ci.org/lorenzofox3/Smart-Table)
+# leanIX Smart Table fork
+This is a for of [Angular Smart Table](https://github.com/lorenzofox3/Smart-Table), mainly adding infinite scroll & sort & search via AJAX.
 
 # Smart Table
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/lorenzofox3/Smart-Table?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

@@ -1,17 +1,17 @@
 {
-  "name": "angular-smart-table",
-  "version": "2.1.1",
-  "description": "",
-  "main": "index.js",
+  "name": "leanix-smart-table",
+  "version": "0.0.0",
+  "description": "table module for angular",
+  "main": "dist/smart-table.js",
   "scripts": {
     "test": "node ./node_modules/.bin/gulp karma-CI"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lorenzofox3/Smart-Table.git"
+    "url": "https://github.com/leanix/leanix-smart-table.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "leanIX",
+  "license": "MIT",
   "devDependencies": {
     "gulp": "^3.8.7",
     "gulp-concat": "^2.3.4",
