@@ -4,10 +4,10 @@ var uglify = require('gulp-uglify');
 var karma = require('karma').server;
 var jshint = require('gulp-jshint');
 var insert = require('gulp-insert');
-var sourcemaps = require('gulp-sourcemaps');
+// var sourcemaps = require('gulp-sourcemaps');
 var stylish = require('jshint-stylish');
 var packageJson = require('./package.json');
-var pluginList = ['stSearch', 'stSelectRow', 'stSort', 'stPagination', 'stPipe'];
+var pluginList = ['stSearch', 'stSelectRow', 'stSort', 'stPagination', 'stPipe', 'stRemote'];
 var disFolder = './dist/';
 var src = (['smart-table.module', 'stConfig', 'stTable']).concat(pluginList).map(function (val) {
     return 'src/' + val + '.js';
@@ -43,9 +43,9 @@ gulp.task('karma-CI', function (done) {
 
 gulp.task('concat', function () {
     gulp.src(src, { base: '.' })
-        .pipe(sourcemaps.init())
+        // .pipe(sourcemaps.init())
         .pipe(concat('smart-table.js'))
-        .pipe(sourcemaps.write())
+        // .pipe(sourcemaps.write())
         .pipe(gulp.dest(disFolder));
 });
 
