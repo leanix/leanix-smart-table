@@ -1,13 +1,13 @@
 {
     "name": "leanix-smart-table",
-    "version": "2.1.4",
+    "version": "2.1.5",
     "homepage": "https://github.com/leanix/leanix-smart-table",
     "authors": [
         "lorenzofox3 <laurent34azerty@gmail.com>",
         "leanIX"
     ],
     "description": "table module for angular",
-    "main": "dist/smart-table.js",
+    "main": ["dist/smart-table.js", "dist/smart-table.css"],
     "keywords": [
         "smart-table",
         "angular",

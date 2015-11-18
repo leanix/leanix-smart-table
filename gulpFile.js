@@ -49,9 +49,16 @@ gulp.task('concat', function () {
         .pipe(gulp.dest(disFolder));
 });
 
+gulp.task('copy-css', function () {
+    gulp.src('src/smart-table.css')
+        .pipe(gulp.dest(disFolder));
+});
+
 gulp.task('test', ['karma-CI']);
 
-gulp.task('build',['test', 'uglify', 'concat'], function () {
+gulp.task('default', ['build']);
+
+gulp.task('build',['test', 'uglify', 'concat', 'copy-css'], function () {
 
     var version = packageJson.version;
     var string = '/** \n* @version ' + version + '\n* @license MIT\n*/\n';
