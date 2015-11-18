@@ -7,7 +7,7 @@
         "leanIX"
     ],
     "description": "table module for angular",
-    "main": "dist/smart-table.js",
+    "main": ["dist/smart-table.js", "dist/smart-table.css"],
     "keywords": [
         "smart-table",
         "angular",

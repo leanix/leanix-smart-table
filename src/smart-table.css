@@ -1,0 +1,24 @@
+/*--- Global SmartTable styles ----------------------------------------------*/
+.st-sort-ascent:after {
+  position: relative;
+  bottom: 10px;
+  left: 5px;
+  content: "";
+  border: 4px solid transparent;
+  border-bottom-color: black;
+}
+.st-sort-descent:after {
+  position: relative;
+  top: 12px;
+  left: 5px;
+  content: "";
+  border: 4px solid transparent;
+  border-top-color: black;
+}
+th[st-sort] {
+  cursor: pointer;
+  color: #028512;
+}
+th[st-sort]:hover {
+  text-decoration: underline;
+}
