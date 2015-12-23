@@ -571,6 +571,11 @@ ng.module('smart-table')
           }
           var params = {};
           ng.forEach(opts.queryLabels, function(value, key) { if (key in d) {params[value] = d[key];} });
+          
+          if (ng.isFunction(opts.beforeRequest)) {
+            config = opts.beforeRequest();
+          }
+
           var config = {method: 'GET', url: opts.url, params: params};
           if (ng.isFunction(opts.queryTransform)) {
             config = opts.queryTransform(config);

@@ -11,6 +11,7 @@ The following options are supported:
 - __pageSize__: Number of items to be retrieved per GET request; set this to `false` to disable paging
 - __container__: Container to be used for infinite scrolling, `'parent'`, `'document'` or a selector (in which case jquery needs to be included)
 - __queryLabels__: Rename any of the query labels (page, size, sort, order, search; e.g. `{search: 'q', size: 'per_page'}`
+- __beforeRequest__: Hook that allows to do something before the request is sent (e.g. show a spinner).
 - __queryTransform__: Transform $http config object before request is sent
   Example:
   ```

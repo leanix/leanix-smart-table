@@ -1,6 +1,6 @@
 {
   "name": "leanix-smart-table",
-  "version": "2.1.1",
+  "version": "2.1.6",
   "description": "table module for angular",
   "main": "dist/smart-table.js",
   "scripts": {
