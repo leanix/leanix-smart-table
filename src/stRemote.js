@@ -151,8 +151,10 @@ ng.module('smart-table')
           });
         }
 
-        // Call custom pipe once to start loading the table
-        ctrl.pipe();
+        if (!opts.preventImmediateLoad) {
+          // Call custom pipe once to start loading the table
+          ctrl.pipe();
+        }
 
         // Helpers
         function getRemainingHeight () {
