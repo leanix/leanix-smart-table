@@ -1,5 +1,5 @@
 /** 
-* @version 2.1.1
+* @version 2.1.7
 * @license MIT
 */
 (function (ng, undefined){
@@ -657,8 +657,10 @@ ng.module('smart-table')
           });
         }
 
-        // Call custom pipe once to start loading the table
-        ctrl.pipe();
+        if (!opts.preventImmediateLoad) {
+          // Call custom pipe once to start loading the table
+          ctrl.pipe();
+        }
 
         // Helpers
         function getRemainingHeight () {
