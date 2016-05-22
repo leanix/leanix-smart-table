@@ -646,7 +646,7 @@ ng.module('smart-table')
 
         // Initialise infinite scrolling
         if (opts.pageSize !== Infinity) {
-          container.bind('scroll', scrollHandler);
+          container.on('scroll', scrollHandler);
 
           // Handling of window resize
           var endOfResizeTimeout;
@@ -675,6 +675,10 @@ ng.module('smart-table')
           // Call custom pipe once to start loading the table
           ctrl.pipe();
         }
+
+        element.on('$destroy', function() {
+           container.off('scroll', scrollHandler);
+        });
 
         // Helpers
         function getRemainingHeight () {
