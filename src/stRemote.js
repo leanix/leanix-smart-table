@@ -65,7 +65,7 @@ ng.module('smart-table')
           }
           var params = {};
           ng.forEach(opts.queryLabels, function(value, key) { if (key in d) {params[value] = d[key];} });
-          
+
           if (ng.isFunction(opts.beforeRequest)) {
             config = opts.beforeRequest();
           }
@@ -90,11 +90,25 @@ ng.module('smart-table')
                 }
               });
             }
+
+            var total = 0; // Total number of items that ultimately can be delivered from the backend
+            if (opts.totalProperty) {
+              total = data[opts.totalProperty];
+            } else if (data.total) {
+              total = data.total;
+            }
+
+            // if backend has more items than itemsTotal, adjust itemsTotal so that more pages are loaded for infinite scrolling.
+            if (total > itemsTotal) {
+              itemsTotal = total;
+            }
+
             if (d.page > 1) {
               scope.stTable = scope.stTable.concat(items);
             } else {
               scope.stTable = items;
             }
+
             // Success callback
             if (ng.isFunction(opts.success)) {
               opts.success.apply(this, arguments);
@@ -126,7 +140,7 @@ ng.module('smart-table')
 
         // Initialise infinite scrolling
         if (opts.pageSize !== Infinity) {
-          container.bind('scroll', scrollHandler);
+          container.on('scroll', scrollHandler);
 
           // Handling of window resize
           var endOfResizeTimeout;
@@ -155,6 +169,10 @@ ng.module('smart-table')
           // Call custom pipe once to start loading the table
           ctrl.pipe();
         }
+
+        element.on('$destroy', function() {
+           container.off('scroll', scrollHandler);
+        });
 
         // Helpers
         function getRemainingHeight () {
