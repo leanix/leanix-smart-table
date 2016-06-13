@@ -1,5 +1,5 @@
 /** 
-* @version 2.1.7
+* @version 2.1.9
 * @license MIT
 */
 (function (ng, undefined){
@@ -692,7 +692,8 @@ ng.module('smart-table')
         }
 
         function scrollHandler () {
-          if (infiniteScrollingActive) {
+          var elementInDom = element && angular.element.contains(document, element[0]);
+          if (infiniteScrollingActive && elementInDom) {
             if (pagination.start + opts.pageSize >= itemsTotal) { return; }
             pagination.numberOfPages = itemsTotal;
             var remaining = getRemainingHeight();
