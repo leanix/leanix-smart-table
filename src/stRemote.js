@@ -186,7 +186,8 @@ ng.module('smart-table')
         }
 
         function scrollHandler () {
-          if (infiniteScrollingActive) {
+          var elementInDom = element && angular.element.contains(document, element[0]);
+          if (infiniteScrollingActive && elementInDom) {
             if (pagination.start + opts.pageSize >= itemsTotal) { return; }
             pagination.numberOfPages = itemsTotal;
             var remaining = getRemainingHeight();
